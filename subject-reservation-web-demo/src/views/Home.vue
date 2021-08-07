@@ -2,16 +2,24 @@
   <div class="home">
     <br />
     <p style="font-family: Roboto; font-size: 18pt">
-      SIT Subject Reservation Web
+      SIT Subject Reservation Web By Ken
     </p>
     <br />
     <v-row justify="center" align="top" no-gutters style="height: 150px">
-      <v-col v-for="subject in subjectList" :key="subject.subjectId" cols="3" class="pa-2">
-        <subject :subject="subject" @fetchSubjects="getSubjectList()" @subjectIsMax="errorSubjectIsMax()" />
+      <v-col
+        v-for="subject in subjectList"
+        :key="subject.subjectId"
+        cols="3"
+        class="pa-2"
+      >
+        <subject
+          :subject="subject"
+          @fetchSubjects="getSubjectList()"
+          @subjectIsMax="errorSubjectIsMax()"
+        />
       </v-col>
     </v-row>
     <v-dialog v-model="isError" width="500">
-
       <v-card>
         <v-card-title class="text-h5 grey lighten-2">
           Notification from Ajarn
@@ -22,13 +30,14 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="isError = false"> ยอมรับน้ำตาไหล </v-btn>
+          <v-btn color="primary" text @click="isError = false">
+            ยอมรับน้ำตาไหล
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
 </template>
-
 
 <script>
 import Subject from "../components/Subject";
@@ -54,19 +63,19 @@ export default {
     this.getSubjectList();
   },
   methods: {
-    getSubjectList: async function () {
+    getSubjectList: async function() {
       try {
         this.subjectList = await fetchSubjectList();
-        this.subjectList.forEach(subject => {
-          subject.image = 'https://quarkus.io/assets/images/quarkus_card.png'
+        this.subjectList.forEach((subject) => {
+          subject.image = "https://quarkus.io/assets/images/quarkus_card.png";
         });
       } catch (error) {
         console.log(error.message);
       }
     },
-    errorSubjectIsMax: function(){
-        this.isError = true;
-    }
+    errorSubjectIsMax: function() {
+      this.isError = true;
+    },
   },
 };
 </script>
